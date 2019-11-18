@@ -1,0 +1,25 @@
+source ./FRNG_N_OF_DST
+echo "FRNG_N_OF_DST=$FRNG_N_OF_DST"
+START=0
+END=$FRNG_N_OF_DST
+LINK_NAME="link_"
+
+pushd .
+cd ../srv
+pwd
+bin/obj_dir/Vshunt_verilator_dpi | tee split.log &
+popd
+sleep 5 
+
+for (( c=$START; c<$END; c++ ))
+do
+	DIR_NAME="$LINK_NAME$c"
+	pushd .
+        cd ../$DIR_NAME
+	pwd
+        bin/obj_dir/Vshunt_verilator_dpi | tee split_0.log &
+        popd
+done
+ 
+echo
+echo "END sim"
