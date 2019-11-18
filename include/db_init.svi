@@ -29,6 +29,8 @@ begin: init_db
    if(Frng_if.who_iam() == `MY_TOP_NAME) Frng_if.frng_success = Frng_if.set_signal_db_entry("link_0","wen[1]",10,32,FRNG_PORT_INPUT);
    if(Frng_if.who_iam() == `MY_TOP_NAME) Frng_if.frng_success = Frng_if.set_signal_db_entry("link_1","wen[1]",10,32,FRNG_PORT_OUTPUT);
    if(Frng_if.who_iam() == `MY_TOP_NAME) Frng_if.frng_success = Frng_if.set_signal_db_entry("link_1","wen[2]",10,32,FRNG_PORT_INPUT);
+
+
    //-----/\------
    //Frng_if.frng_success = Frng_if.print_SrcDsts_db();
    //Frng_if.frng_success = Frng_if.print_signals_db();

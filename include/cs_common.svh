@@ -3,17 +3,20 @@
 //`define  FRNG_N_OF_DST_16
 //`define  FRNG_N_OF_DST_8
 //`define  FRNG_N_OF_DST_4
-`define  DB_INIT_DEBUG
 
-`ifdef  FRNG_N_OF_DST_16
- `define FRNG_N_OF_DST  16
-`elsif FRNG_N_OF_DST_8
- `define FRNG_N_OF_DST 8
-`elsif FRNG_N_OF_DST_4
- `define FRNG_N_OF_DST  4
-`else
- `define  FRNG_N_OF_DST  2
-`endif
+/* -----\/----- EXCLUDED -----\/-----
+`ifndef FRNG_N_OF_DST 
+ `ifdef  FRNG_N_OF_DST_16
+  `define FRNG_N_OF_DST  16
+ `elsif FRNG_N_OF_DST_8
+  `define FRNG_N_OF_DST 8
+ `elsif FRNG_N_OF_DST_4
+  `define FRNG_N_OF_DST  4
+ `else
+  `define  FRNG_N_OF_DST  1
+ `endif
+`endif //  `ifndef FRNG_N_OF_DST
+ -----/\----- EXCLUDED -----/\----- */
 
 
 
