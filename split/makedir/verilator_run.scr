@@ -1,0 +1,2 @@
+sleep 5
+cd ../bin;obj_dir/Vshunt_verilator_dpi | tee split.log &
