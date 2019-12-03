@@ -25,16 +25,18 @@ module top_rtl(input reg i_clk,input reg reset_n);
       Frng_if.frng_success = Frng_if.set_iam(`MY_TOP_NAME);
       Frng_if.frng_success = Frng_if.set_mystatus(Frng_if.FRNG_INITIATOR_ACTIVE);
       Frng_if.frng_success = Frng_if.set_simid(`SIM_ID);
-      Frng_if.print_localparams();
+      //Frng_if.print_localparams();
       //
       //$display("link instance  %s",my_name);
       foreach( my_signals[i]) begin
 	 my_id.itoa(i);
 	 my_signals[i] = {"wen","[",my_id,"]"};
       end
+/* -----\/----- EXCLUDED -----\/-----
       foreach( my_signals[i]) begin
 	 $display("my_signals[%0d]=%s",i,my_signals[i]); 
       end
+ -----/\----- EXCLUDED -----/\----- */
 
 `ifdef DB_INIT_DEBUG
  `include "../include/db_init.svi"      
@@ -49,9 +51,9 @@ module top_rtl(input reg i_clk,input reg reset_n);
 `endif
       
 	    
-      $display("i am : %s (%s) source(%s)",Frng_if.who_iam(),Frng_if.my_status.name(),Frng_if.my_source);
-      Frng_if.frng_success = Frng_if.print_SrcDsts_db();
-      Frng_if.frng_success = Frng_if.print_signals_db();
+      //$display("i am : %s (%s) source(%s)",Frng_if.who_iam(),Frng_if.my_status.name(),Frng_if.my_source);
+      //Frng_if.frng_success = Frng_if.print_SrcDsts_db();
+      //Frng_if.frng_success = Frng_if.print_signals_db();
            
    end // initial begin
 
@@ -61,7 +63,7 @@ module top_rtl(input reg i_clk,input reg reset_n);
    
    /* verilator lint_off IGNOREDRETURN */    
    always @(posedge i_clk) begin
-      $display("------ @%0d",Frng_if.get_time());
+      //$display("------ @%0d",Frng_if.get_time());
       data_input_loop ();
    end // always @ (posedge clk_i)
 
@@ -89,7 +91,7 @@ module top_rtl(input reg i_clk,input reg reset_n);
 	       for(int signal_name_index=0;signal_name_index<`FRNG_N_OF_SRC_SIGNALS;signal_name_index++) begin
 		  if (signal_name == my_signals[signal_name_index])  begin 
 		     wen[signal_name_index] = data_get.data_bit[0];
-		     $display("%s %s data_get.data_bit=%0h wen[%0d]=%0d @%0d",Frng_if.who_iam(),signal_name,data_get.data_bit,signal_name_index,wen[signal_name_index],Frng_if.get_time());
+		     //$display("%s %s data_get.data_bit=%0h wen[%0d]=%0d @%0d",Frng_if.who_iam(),signal_name,data_get.data_bit,signal_name_index,wen[signal_name_index],Frng_if.get_time());
 		  end
 	       end // for (int signal_name_index=0;signal_name_index<`FRNG_N_OF_SRC_SIGNALS;signal_name_index++)
 	    end // if (success)
@@ -115,7 +117,7 @@ module top_rtl(input reg i_clk,input reg reset_n);
 		
 		data_put.data_bit[0]   = wen[i_in];
 		Frng_if.fringe_api_put (parent_name,signal_name,Frng_if.SHUNT_BIT,data_put);
-		$display("%s  my_signals[%0d] %s.%s data_put.data_bit=%0h %s @%0d",Frng_if.who_iam(),i_in,parent_name,signal_name,wen[i_in],Frng_if.signals_db[signal_index].signal_port_type.name(),Frng_if.get_time());
+		//$display("%s  my_signals[%0d] %s.%s data_put.data_bit=%0h %s @%0d",Frng_if.who_iam(),i_in,parent_name,signal_name,wen[i_in],Frng_if.signals_db[signal_index].signal_port_type.name(),Frng_if.get_time());
 	     end // if (Frng_if.signals_db[signal_index].signal_port_type == FRNG_PORT_OUTPUT &&  Frng_if.who_iam() != parent_name &&)
 	end // for (signal_index=0;signal_index<`FRNG_N_OF_SIGNALS;signal_index++)
       

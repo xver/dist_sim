@@ -17,8 +17,8 @@ module  top_sim (input reg clk_i);
    always @(posedge clk_i) begin
       //$display("%s --------clk_cnt(%0d) @(%0t)", dut.Frng_if.who_iam(),dut.Frng_if.get_time(),$time-start_time);
       if ( dut.Frng_if.who_iam() == `MY_TOP_NAME && $time-start_time > 60 ) begin 
-	 $display("%s event_cnt(%0d) clk_cnt(%0d) @%0t", dut.Frng_if.who_iam(),event_cnt,dut.Frng_if.get_time(),$time-start_time);
-	 $display("%s Sim END", dut.Frng_if.who_iam());
+	 $display("%s Sim END event_cnt(%0d) clk_cnt(%0d) @%0t", dut.Frng_if.who_iam(),event_cnt,dut.Frng_if.get_time(),$time-start_time);
+	 $display("%s $finish", dut.Frng_if.who_iam());
 	 $finish;  
       end
    end
