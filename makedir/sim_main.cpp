@@ -36,7 +36,7 @@ int main(int argc, char **argv, char **env) {
     tfp->flush();
     tfp->dump(main_time);
     gettimeofday(&currentTimeSec, NULL);
-    printf(">>>@%0ld sec\n",currentTimeSec.tv_sec-startTime.tv_sec);
+    //printf(">>>@%0ld sec\n",currentTimeSec.tv_sec-startTime.tv_sec);
     main_time++;  // Time passes...
   }
   // Destroy model
