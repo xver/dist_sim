@@ -2,7 +2,7 @@
 /* verilator lint_off UNUSED */
 /* verilator lint_off UNOPTFLAT */
 /* verilator lint_off DECLFILENAME */
-module top_rtl(input reg i_clk,input reg reset_n);
+module top_rtl(input reg i_clk,input reg reset_n,output reg benchmark_event);
    import shunt_dpi_pkg::*;
    import  shunt_fringe_pkg::*;
    
@@ -14,15 +14,15 @@ module top_rtl(input reg i_clk,input reg reset_n);
    reg [31:0] clk_cnt[`N_LINK:0];
    reg [31:0] id     [`N_LINK:0];
 
-   reg        wen_to_link    [`N_LINK-1:0];
-   reg [31:0] token_to_link  [`N_LINK-1:0];
-   reg [31:0] clk_cnt_to_link[`N_LINK-1:0];
-   reg [31:0] id_to_link     [`N_LINK-1:0];
+   reg        wen_to_link    [`N_LINK:0];
+   reg [31:0] token_to_link  [`N_LINK:0];
+   reg [31:0] clk_cnt_to_link[`N_LINK:0];
+   reg [31:0] id_to_link     [`N_LINK:0];
 
-   reg        wen_from_link    [`N_LINK-1:0];
-   reg [31:0] token_from_link  [`N_LINK-1:0];
-   reg [31:0] clk_cnt_from_link[`N_LINK-1:0];
-   reg [31:0] id_from_link     [`N_LINK-1:0];
+   reg        wen_from_link    [`N_LINK:0];
+   reg [31:0] token_from_link  [`N_LINK:0];
+   reg [31:0] clk_cnt_from_link[`N_LINK:0];
+   reg [31:0] id_from_link     [`N_LINK:0];
 
    //
    shunt_fringe_if Frng_if (i_clk); 
@@ -32,7 +32,8 @@ module top_rtl(input reg i_clk,input reg reset_n);
    //assign clk_cnt[0] = clk_cnt  [`N_LINK];
    //assign id     [0] = id       [`N_LINK];
    //
-   
+   assign benchmark_event = wen_from_link[`N_LINK-1];
+
 
 
    initial begin
