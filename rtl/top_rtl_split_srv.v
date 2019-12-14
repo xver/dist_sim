@@ -2,7 +2,7 @@
 /* verilator lint_off UNUSED */
 /* verilator lint_off UNOPTFLAT */
 /* verilator lint_off DECLFILENAME */
-module top_rtl(input reg i_clk,input reg reset_n);
+module top_rtl(input reg i_clk,input reg reset_n,output reg benchmark_event);
    
    import shunt_dpi_pkg::*;
    import  shunt_fringe_pkg::*;
@@ -15,12 +15,13 @@ module top_rtl(input reg i_clk,input reg reset_n);
    string               my_id = "0";
    string     my_signals    [`FRNG_N_OF_SRC_SIGNALS];
    //
-   
+
    //
    shunt_fringe_if Frng_if (i_clk); 
    //
-   assign              wen[0] = wen[`N_LINK];
-      
+   assign  wen[0] = wen[`N_LINK];
+   assign  benchmark_event = wen[`N_LINK];
+
    initial begin
       Frng_if.frng_success = Frng_if.set_iam(`MY_TOP_NAME);
       Frng_if.frng_success = Frng_if.set_mystatus(Frng_if.FRNG_INITIATOR_ACTIVE);
@@ -54,13 +55,13 @@ module top_rtl(input reg i_clk,input reg reset_n);
       //$display("i am : %s (%s) source(%s)",Frng_if.who_iam(),Frng_if.my_status.name(),Frng_if.my_source);
       //Frng_if.frng_success = Frng_if.print_SrcDsts_db();
       //Frng_if.frng_success = Frng_if.print_signals_db();
-           
+
    end // initial begin
 
     always @(posedge i_clk) begin
 	  wen[0] <= wen[`N_LINK]; 
        end
-   
+
    /* verilator lint_off IGNOREDRETURN */    
    always @(posedge i_clk) begin
       //$display("------ @%0d",Frng_if.get_time());
