@@ -2,7 +2,7 @@
 /* verilator lint_off UNUSED */
 /* verilator lint_off UNOPTFLAT */
 /* verilator lint_off DECLFILENAME */
-module top_rtl(input reg i_clk,input reg reset_n);
+module top_rtl(input reg i_clk,input reg reset_n,output reg benchmark_event);
   
    //reg i_clk;
    //reg reset_n;
@@ -22,6 +22,8 @@ module top_rtl(input reg i_clk,input reg reset_n);
    reg [31:0] clk_cnt_from_link[`N_LINK-1:0];
    reg [31:0] id_from_link     [`N_LINK-1:0];
 
+   assign  benchmark_event = wen_from_link[`N_LINK-1];
+   
    //
    shunt_fringe_if Frng_if (i_clk); 
    //
