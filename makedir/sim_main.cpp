@@ -8,10 +8,11 @@ struct timeval startTime;
 struct timeval currentTimeSec;
 
 double sc_time_stamp() {
-  struct timeval currentTime_func;
-  gettimeofday(&currentTime_func, NULL);
-  //return (currentTime_func.tv_sec * (int)1e6 + currentTime_func.tv_usec);
-  return (currentTime_func.tv_sec);
+ //  struct timeval currentTime_func;
+//   gettimeofday(&currentTime_func, NULL);
+//   //return (currentTime_func.tv_sec * (int)1e6 + currentTime_func.tv_usec);
+//   return (currentTime_func.tv_sec);
+  return (main_time);
 }
 
 int main(int argc, char **argv, char **env) {
@@ -39,6 +40,8 @@ int main(int argc, char **argv, char **env) {
     //printf(">>>@%0ld sec\n",currentTimeSec.tv_sec-startTime.tv_sec);
     main_time++;  // Time passes...
   }
+  gettimeofday(&currentTimeSec, NULL);
+  printf(">>>@%0ld sec\n",currentTimeSec.tv_sec-startTime.tv_sec);
   // Destroy model
   if (tfp) { tfp->close(); tfp = NULL; }
   delete top_sim; top_sim = NULL;
