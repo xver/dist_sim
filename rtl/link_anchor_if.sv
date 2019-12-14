@@ -75,17 +75,17 @@ interface  link_anchor_if
       `endif
       
      
-      $display("i am : %s (%s) source(%s) ID(%0d)",Frng_if.who_iam(),Frng_if.my_status.name(),Frng_if.my_source,ID);
+	//$display("i am : %s (%s) source(%s) ID(%0d)",Frng_if.who_iam(),Frng_if.my_status.name(),Frng_if.my_source,ID);
    end // initial begin
   
    always @(posedge i_clk) begin
       /* verilator lint_off WIDTH */
       data_in_t  data_put;
       
-      $display("------ @%0d",Frng_if.get_time());
+      //$display("------ @%0d",Frng_if.get_time());
       if(!i_rstn)  data_put.data_bit <=0;
       data_put.data_bit[0]   <= i_wen_down;
-      $display("%s %s.%s data_put.data_bit=%0h @%0d",Frng_if.who_iam(),`MY_TOP_NAME ,my_signals[1],data_put.data_bit[0],Frng_if.get_time());
+      //$display("%s %s.%s data_put.data_bit=%0h @%0d",Frng_if.who_iam(),`MY_TOP_NAME ,my_signals[1],data_put.data_bit[0],Frng_if.get_time());
       put_success <= Frng_if.fringe_api_put (`MY_TOP_NAME,my_signals[1],Frng_if.SHUNT_BIT,data_put);
    end // always @ (i_wen_down)
    
@@ -96,7 +96,7 @@ interface  link_anchor_if
 	 if (Frng_if.signals_db[i].signal_valid == FRNG_SIGNAL_VALID_GET) begin
 	    success <=  Frng_if.fringe_api_get_by_signal_index(i,data_get);
 	    if (success)   begin
-	       $display("%s %s.%s data_get.data_bit=%0h @%0d",Frng_if.who_iam(),`MY_TOP_NAME,Frng_if.__signals_db_name[i],data_get.data_bit[0],Frng_if.get_time());
+	       //$display("%s %s.%s data_get.data_bit=%0h @%0d",Frng_if.who_iam(),`MY_TOP_NAME,Frng_if.__signals_db_name[i],data_get.data_bit[0],Frng_if.get_time());
 	       o_wen_down <= data_get.data_bit[0];
 	    end
 	 end // if (Frng_if.signals_db[i].signal_valid == FRNG_SIGNAL_VALID_GET)
