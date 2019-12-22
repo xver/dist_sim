@@ -1,0 +1,24 @@
+begin: init_db
+   fringe_port_type_e port_type_=FRNG_PORT_NA;
+   
+   Frng_if.frng_success = Frng_if.init_SrcDsts_db(`N_LINK+1);
+   
+   //-----\/--- insert SrcDst_db
+   //-----/\--- insert SrcDst_db
+   
+   if(!Frng_if.pnp_init()) $display("ERROR: %s Frng_if.pnp_init()",Frng_if.who_iam());
+   else $display("PASS %s  Frng_if.pnp_init()",Frng_if.who_iam());
+   
+   //Frng_if.frng_success = Frng_if.print_SrcDsts_db();
+   //Frng_if.frng_success = Frng_if.print_signals_db();
+   //
+   Frng_if.frng_success = Frng_if.init_signals_db();
+   
+   //-----\/--- insert signal_db
+   //-----/\--- insert signal_db
+   
+   //Frng_if.frng_success = Frng_if.print_SrcDsts_db();
+   //Frng_if.frng_success = Frng_if.print_signals_db();
+end // block: init_db
+
+
