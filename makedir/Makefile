@@ -67,6 +67,11 @@ endif
 .PHONY: run_modified
 run_modified:
 	cd ../modified/makedir  && ./$(SIM)_run
+
+####################
+.PHONY: build_insert_db
+build_insert_db:
+	./insert_db_init.py ../modified/bin/modf.log  ../include/db_init_template.svi ../include/db_init.svi
 ###################
 ###Anchor
 .PHONY: make_all_anchor
@@ -119,5 +124,8 @@ run_split:
 
 .PHONY:	clean_all
 clean_all: clean_origin clean_modified clean_anchor clean_split
+
+.PHONY: build_all
+build_all: build_shunt build_origin_sv run_origin build_modified_sv run_modified build_insert_db build_anchor_sv build_split_sv run_split
 ###################
 
