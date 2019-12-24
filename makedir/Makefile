@@ -126,6 +126,6 @@ run_split:
 clean_all: clean_origin clean_modified clean_anchor clean_split
 
 .PHONY: build_all
-build_all: build_shunt build_origin_sv run_origin build_modified_sv run_modified build_insert_db build_anchor_sv build_split_sv run_split
+build_all: build_shunt build_modified_sv run_modified build_insert_db build_anchor_sv  run_anchor build_split_sv run_split
 ###################
 

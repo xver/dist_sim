@@ -1,3 +1,4 @@
+#!/bin/bash
 source ./FRNG_N_OF_DST
 echo "FRNG_N_OF_DST=$FRNG_N_OF_DST"
 START=0
@@ -17,8 +18,8 @@ do
 	pushd .
         cd ../$DIR_NAME
 	pwd
-        bin/obj_dir/Vshunt_verilator_dpi | tee split_0.log &
-        popd
+        bin/obj_dir/Vshunt_verilator_dpi | tee "$LINK_NAME$c".log &
+	popd
 done
  
 echo

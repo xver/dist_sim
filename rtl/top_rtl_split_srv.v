@@ -39,19 +39,8 @@ module top_rtl(input reg i_clk,input reg reset_n,output reg benchmark_event);
       end
  -----/\----- EXCLUDED -----/\----- */
 
-`ifdef DB_INIT_DEBUG
- `include "../include/db_init.svi"      
-`elsif FRNG_N_OF_DST_16
- `include "../include/db_init_16.svi"
-`elsif FRNG_N_OF_DST_8
- `include "../include/db_init_8.svi"
-`elsif FRNG_N_OF_DST_4
- `include "../include/db_init_4.svi"
-`else
- `include "../include/db_init_2.svi"	
-`endif
+`include "../include/db_init.svi"      
       
-	    
       //$display("i am : %s (%s) source(%s)",Frng_if.who_iam(),Frng_if.my_status.name(),Frng_if.my_source);
       //Frng_if.frng_success = Frng_if.print_SrcDsts_db();
       //Frng_if.frng_success = Frng_if.print_signals_db();

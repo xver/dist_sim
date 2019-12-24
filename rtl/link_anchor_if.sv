@@ -62,17 +62,7 @@ interface  link_anchor_if
       Frng_if.frng_success = Frng_if.set_mystatus(Frng_if.FRNG_TARGET_ACTIVE);
       Frng_if.frng_success = Frng_if.set_simid(`SIM_ID);
 
-      `ifdef DB_INIT_DEBUG
-       `include "../include/db_init.svi"      
-      `elsif FRNG_N_OF_DST_16
-       `include "../include/db_init_16.svi"
-      `elsif FRNG_N_OF_DST_8
-       `include "../include/db_init_8.svi"
-      `elsif FRNG_N_OF_DST_4
-       `include "../include/db_init_4.svi"
-      `else
-       `include "../include/db_init_2.svi"	
-      `endif
+      `include "../include/db_init.svi"      
       
      
 	//$display("i am : %s (%s) source(%s) ID(%0d)",Frng_if.who_iam(),Frng_if.my_status.name(),Frng_if.my_source,ID);

@@ -1078,7 +1078,7 @@ endfunction : print_signals_db
 		 $display("\n%s ERROR:tcp_connect_n_frng_reg_target()  %s SrcDst_registration_request",s_me,i_am);
 	       else begin
 		  SrcDsts_db[SrcDst_db_index].socket_id  = socket_id;
-		  $display("\n%s PASS:tcp_connect_n_frng_reg_target() %s SrcDst_registration_request",s_me,i_am);
+		  $display("\n%s PASS:tcp_connect_n_frng_reg_target() %s SrcDst_registration_request socket(%0d)",s_me,i_am, socket_id);
 		  success=1;
 	       end
 	    end // if (socket_id>=0)
