@@ -1003,11 +1003,11 @@ endfunction : print_signals_db
       success =1;
       if (get_mystatus()== FRNG_INITIATOR_ACTIVE && success==1) begin 
 	 success = tcp_connect_n_frng_reg_initiator(`MY_PORT);
-	 $display("INFO: Frng_if.pnp_init() %s tcp_connect_n_frng_reg_initiator my_parent_fd=%0d success=%0d",Frng_if.who_iam(),my_parent_fd,success);
+	 $display("INFO: Frng_if.pnp_init() %s initiator my_parent_fd=%0d success=%0d",Frng_if.who_iam(),my_parent_fd,success);
       end
       if (get_mystatus()== FRNG_TARGET_ACTIVE    && success==1) begin 
 	 success = tcp_connect_n_frng_reg_target (`MY_PORT,`MY_HOST);
-	 $display("INFO: Frng_if.pnp_init() %s tcp_connect_n_frng_reg_target success=%0d",Frng_if.who_iam(),success);
+	 $display("INFO: Frng_if.pnp_init() %s target success=%0d",Frng_if.who_iam(),success);
       end
       if (success==1)  $display("\nPASS %s %s pnp_init(); ",s_me,i_am);
       else success =0;
@@ -1048,6 +1048,7 @@ endfunction : print_signals_db
 		 $display("\n%s ERROR: %s SrcDst_registration_response",s_me,i_am);
 		 success =0;
 	      end
+	      else shunt_dpi_tcp_nodelay_socket(1,child_id);
 	   end // for (int i=0;i<N_OF_SRCDSTS-1;i++)
 	end // if (get_mystatus()== FRNG_INITIATOR_ACTIVE)
       return success;
@@ -1079,6 +1080,7 @@ endfunction : print_signals_db
 	       else begin
 		  SrcDsts_db[SrcDst_db_index].socket_id  = socket_id;
 		  $display("\n%s PASS:tcp_connect_n_frng_reg_target() %s SrcDst_registration_request socket(%0d)",s_me,i_am, socket_id);
+		  shunt_dpi_tcp_nodelay_socket(1,socket_id);
 		  success=1;
 	       end
 	    end // if (socket_id>=0)
@@ -1171,7 +1173,7 @@ endfunction : print_signals_db
      string  s_me = "SrcDst_registration_response()";
      
      success = 0;
-     if (shunt_dpi_recv_header(socket_id,h_)>0)  begin 
+     if (shunt_dpi_recv_header(socket_id,h_)>0)  begin
 	success = 1;
         SrcDst_db_index = get_index_by_name_hash_SrcDsts_db(h_.data_type);
 	//
@@ -1204,7 +1206,7 @@ endfunction : print_signals_db
 	if(shunt_dpi_send_header(socket_id,h_)>0 && success)success=1;  
      end // if (shunt_dpi_recv_header(socket_id,h_)>0)
      //
-     $display("\n %s %s success=%0d SrcDst_db_index=%0d\n",s_me,i_am,success,SrcDst_db_index);
+     $display("\n %s %s success=%0d SrcDst_db_index=%0d\n",s_me,who_iam(),success,SrcDst_db_index);
      return success;
   endfunction : SrcDst_registration_response
    
